@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+@include('layout.head')
+
+<body>
+    <div id="app">
+        <div class="main-wrapper">
+            <div class="main-content">
+                <div class="container">
+                    <form method="post" action="{{ route('store-user') }}" enctype="multipart/form-data" novalidate>
+                        @csrf
+                        <div class="card mt-5">
+                            <div class="card-header">
+                                <h3>User Baru</h3>
+                            </div>
+                            <div class="card-body">
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <div class="alert-title">
+                                        <h4>Whoops!</h4>
+                                    </div>
+                                    There are some problems with your input.
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
+
+                                @if (session('success'))
+                                <div class="alert alert-success">{{ session('success') }}</div>
+                                @endif
+
+                                @if (session('error'))
+                                <div class="alert alert-danger">{{ session('error') }}</div>
+                                @endif
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingInput" name="nama" value="" placeholder="Nama" required>
+                                    <label for="floatingInput">Nama</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="floatingInput" name="email" value="" placeholder="email">
+                                    <label for="floatingInput">Email</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="floatingPassword" name="password" value="" placeholder="Password" required>
+                                    <label for="floatingPassword">Password</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="floatingPasswordConfirmation" name="password_confirmation" value="" placeholder="Konfirmasi password" required>
+                                    <label for="floatingPasswordConfirmation">Konfirmasi Password</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" id="floatingSelect" name="id_level" aria-label="Floating label select example" required>
+                                        <option value="" selected disabled>Pilih Level</option>
+                                        @foreach ($levels as $level)
+                                        <option value="{{ $level->id }}">{{ $level->level }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="floatingSelect">Pilih Level</label>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="profilePicture" class="form-label">Foto Profil</label>
+                                    <input type="file" class="form-control" id="profilePicture" name="profile_picture" accept="image/*">
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-grid gap-2 mt-3">
+                                    <button type="submit" class="btn btn-outline-primary">Buat</button>
+                                    <a href="{{ route('list-menu') }}" class="btn btn-outline-danger">Kembali</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
