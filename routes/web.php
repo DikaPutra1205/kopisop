@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/order/{id}/viewdetail', [OrderController::class, 'viewOrderDetail'])->name('view-order-detail');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('update-profile');
+    Route::post('/update-password', [ProfileController::class, 'updatePassword'])->name('update-password');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'checkAdmin']], function () {
