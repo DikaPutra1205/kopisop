@@ -12,7 +12,7 @@
                     <h1>Menu</h1>
                     <nav>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                             <li class="breadcrumb-item active">Menu</li>
                         </ol>
                     </nav>
@@ -29,10 +29,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nama Menu</th>
-                            <th>Harga</th>
-                            <th>Gambar</th>
-                            <th>Aksi</th> <!-- Change the column name to Aksi -->
+                            <th>Menu Name</th>
+                            <th>Price</th>
+                            <th>Picture</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,7 @@
                                 </a>
                                 |
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal">
-                                    Hapus
+                                    Delete
                                 </button>
                             </td>
                         </tr>
@@ -82,7 +82,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-trash"></i> Hapus
+                            <i class="fa fa-trash"></i> Delete
                         </button>
                     </form>
                 </div>

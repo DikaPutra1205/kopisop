@@ -28,8 +28,8 @@
                             @endif
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="nama" value="{{ old('nama', $user->nama) }}" placeholder="Nama" required>
-                                <label for="floatingInput">Nama</label>
+                                <input type="text" class="form-control" id="floatingInput" name="nama" value="{{ old('nama', $user->nama) }}" placeholder="Name" required>
+                                <label for="floatingInput">Name</label>
                             </div>
 
                             <div class="form-floating mb-3">
@@ -43,8 +43,8 @@
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPasswordConfirmation" name="password_confirmation" placeholder="Konfirmasi password" required>
-                                <label for="floatingPasswordConfirmation">Konfirmasi Password</label>
+                                <input type="password" class="form-control" id="floatingPasswordConfirmation" name="password_confirmation" placeholder="Re-enter password" required>
+                                <label for="floatingPasswordConfirmation">Re-enter Password</label>
                             </div>
 
                             <div class="form-floating mb-3">
@@ -66,7 +66,7 @@
                         <div class="card-footer">
                             <div class="d-grid gap-2 mt-3">
                                 <button type="submit" class="btn btn-outline-primary">Update</button>
-                                <a href="{{ route('list-menu') }}" class="btn btn-outline-danger">Kembali</a>
+                                <a href="{{ route('list-user') }}" class="btn btn-outline-danger">Kembali</a>
                             </div>
                         </div>
                     </div>

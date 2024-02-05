@@ -10,7 +10,7 @@
               @csrf
               <div class="card mt-5">
                 <div class="card-header">
-                  <h3>Menu Baru</h3>
+                  <h3>Add Menu</h3>
                 </div>
                 <div class="card-body">
                     @if ($errors->any())
@@ -33,17 +33,17 @@
                       <div class="alert alert-danger">{{ session('error') }}</div>
                     @endif
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput" name="nama_menu" value="{{ old('nama_menu') }}" placeholder="Nama Menu">
-                      <label for="floatingInput">Nama Menu</label>
+                      <input type="text" class="form-control" id="floatingInput" name="nama_menu" value="{{ old('nama_menu') }}" placeholder="Menu Name">
+                      <label for="floatingInput">Menu Name</label>
                     </div>
 
                     <div class="form-floating mb-3">
                       <input type="text" class="form-control" id="floatingInput" name="harga" value="{{ old('harga') }}"  placeholder="Harga">
-                      <label for="floatingInput">Harga</label>
+                      <label for="floatingInput">Price</label>
                     </div>
 
                     <div class="mb-3">
-                      <label for="formFile" class="form-label">Gambar</label>
+                      <label for="formFile" class="form-label">Image</label>
                       <input class="form-control" type="file" name="image" id="formFile">
                     </div>
                 </div>

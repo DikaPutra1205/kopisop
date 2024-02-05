@@ -26,17 +26,17 @@
                     @endif
 
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput" name="nama_menu" value="{{ old('nama_menu', $menu->nama_menu) }}" placeholder="Nama Menu">
-                      <label for="floatingInput">Nama Menu</label>
+                      <input type="text" class="form-control" id="floatingInput" name="nama_menu" value="{{ old('nama_menu', $menu->nama_menu) }}" placeholder="Menu Name">
+                      <label for="floatingInput">Menu Name</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="floatingInput" name="harga" value="{{ old('harga', $menu->harga) }}"  placeholder="Harga">
-                      <label for="floatingInput">Harga</label>
+                      <input type="text" class="form-control" id="floatingInput" name="harga" value="{{ old('harga', $menu->harga) }}"  placeholder="Price">
+                      <label for="floatingInput">Price</label>
                     </div>
 
                     <div class="mb-3">
-                      <label for="formFile" class="form-label">Gambar</label>
+                      <label for="formFile" class="form-label">Picture</label>
                       <input class="form-control" type="file" name="image" id="formFile">
                     </div>
                 </div>

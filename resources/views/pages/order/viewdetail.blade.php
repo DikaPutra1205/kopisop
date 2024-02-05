@@ -27,8 +27,10 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <h1 class="h3 mb-3 text-gray-800 mt-2">Order Detail</h1>
-                        <p class="mb-2">Order ID: {{ $order->id }}</p>
-                        <p class="mb-5">Nama Karyawan: {{ $order->user->nama }}</p>
+                        <p class="mb-1"><strong>Order ID:</strong> {{ $order->id }}</p>
+                        <p class="mb-1"><strong>Employee Name:</strong> {{ $order->user->nama }}</p>
+                        <p class="mb-1"><strong>Date:</strong> {{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y') }}</p>
+                        <p class="mb-5"><strong>Table Number:</strong> {{ $order->nomor_meja }}</p>
 
                         <!-- Order Items -->
                         <h3 class="mb-2">Order Details</h3>

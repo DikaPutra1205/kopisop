@@ -11,7 +11,7 @@
                         @csrf
                         <div class="card mt-5">
                             <div class="card-header">
-                                <h3>User Baru</h3>
+                                <h3>Add User</h3>
                             </div>
                             <div class="card-body">
                                 @if ($errors->any())
@@ -36,8 +36,8 @@
                                 <div class="alert alert-danger">{{ session('error') }}</div>
                                 @endif
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" name="nama" value="" placeholder="Nama" required>
-                                    <label for="floatingInput">Nama</label>
+                                    <input type="text" class="form-control" id="floatingInput" name="nama" value="" placeholder="Name" required>
+                                    <label for="floatingInput">Name</label>
                                 </div>
 
                                 <div class="form-floating mb-3">
@@ -51,22 +51,22 @@
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="floatingPasswordConfirmation" name="password_confirmation" value="" placeholder="Konfirmasi password" required>
-                                    <label for="floatingPasswordConfirmation">Konfirmasi Password</label>
+                                    <input type="password" class="form-control" id="floatingPasswordConfirmation" name="password_confirmation" value="" placeholder="Re-enter password" required>
+                                    <label for="floatingPasswordConfirmation">Re-enter Password</label>
                                 </div>
 
                                 <div class="form-floating mb-3">
                                     <select class="form-select" id="floatingSelect" name="id_level" aria-label="Floating label select example" required>
-                                        <option value="" selected disabled>Pilih Level</option>
+                                        <option value="" selected disabled>Select Level</option>
                                         @foreach ($levels as $level)
                                         <option value="{{ $level->id }}">{{ $level->level }}</option>
                                         @endforeach
                                     </select>
-                                    <label for="floatingSelect">Pilih Level</label>
+                                    <label for="floatingSelect">Level Level</label>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="profilePicture" class="form-label">Foto Profil</label>
+                                    <label for="profilePicture" class="form-label">Profile Picture</label>
                                     <input type="file" class="form-control" id="profilePicture" name="profile_picture" accept="image/*">
                                 </div>
 
@@ -74,7 +74,7 @@
                             <div class="card-footer">
                                 <div class="d-grid gap-2 mt-3">
                                     <button type="submit" class="btn btn-outline-primary">Buat</button>
-                                    <a href="{{ route('list-menu') }}" class="btn btn-outline-danger">Kembali</a>
+                                    <a href="{{ route('list-user') }}" class="btn btn-outline-danger">Kembali</a>
                                 </div>
                             </div>
                         </div>

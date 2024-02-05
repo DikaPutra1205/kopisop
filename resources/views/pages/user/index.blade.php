@@ -12,7 +12,7 @@
                     <h1>User</h1>
                     <nav>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                             <li class="breadcrumb-item active">User</li>
                         </ol>
                     </nav>
@@ -29,10 +29,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nama</th>
+                            <th>Name</th>
                             <th>Email</th>
                             <th>Level</th>
-                            <th>Aksi</th> <!-- Change the column name to Aksi -->
+                            <th>Action</th> <!-- Change the column name to Aksi -->
                         </tr>
                     </thead>
                     <tbody>
@@ -88,7 +88,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-trash"></i> Hapus
+                            <i class="fa fa-trash"></i> Delete
                         </button>
                     </form>
                 </div>

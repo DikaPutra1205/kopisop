@@ -12,8 +12,8 @@
                     <h1>User</h1>
                     <nav>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active">User</li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item active">Log Activity</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,9 +26,9 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tanggal</th>
-                            <th>Nama Karyawan</th>
-                            <th>Aktivitas</th>
+                            <th>Date</th>
+                            <th>Employee Name</th>
+                            <th>Activity</th>
                         </tr>
                     </thead>
                     <tbody>

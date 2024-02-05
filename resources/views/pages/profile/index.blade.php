@@ -8,7 +8,7 @@
         <h1>Profile</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                 <li class="breadcrumb-item">Users</li>
                 <li class="breadcrumb-item active">Profile</li>
             </ol>
@@ -71,7 +71,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Position</div>
+                                    <div class="col-lg-3 col-md-4 label">Level</div>
                                     @if (Auth::user()->id_level == 1)
                                     <div class="col-lg-9 col-md-8">Admin</div>
                                     @elseif (Auth::user()->id_level == 2)

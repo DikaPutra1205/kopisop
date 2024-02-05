@@ -32,12 +32,14 @@
     </li>
     @endif
 
+    @if (Auth::user()->id_level == 2 || Auth::user()->id_level == 3)
     <li class="nav-item">
       <a class="nav-link collapsed" href="{{ route('order') }}">
         <i class="bi bi-pencil-square"></i>
         <span>Order</span>
       </a>
     </li>
+    @endif
 
     @if (Auth::user()->id_level == 1 || Auth::user()->id_level == 2)
     <li class="nav-item">

@@ -10,8 +10,7 @@
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">Home</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -19,9 +18,9 @@
     <section class="section dashboard">
       <div class="row">
 
-        <!-- Left side columns -->
         <div class="row">
 
+        @if (Auth::user()->id_level == 2)
           <!-- Sales Card -->
           <div class="col-xxl-4 col-md-6">
             <div class="card info-card sales-card">
@@ -167,6 +166,7 @@
               </div>
             </div>
           </div><!-- End Customers Card -->
+          @endif
 
           <!-- Recent Activity -->
           <div class="card">

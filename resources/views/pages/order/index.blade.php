@@ -9,11 +9,11 @@
         <div class="pagetitle">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h1>User</h1>
+                    <h1>Order</h1>
                     <nav>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item active">User</li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item active">Order</li>
                         </ol>
                     </nav>
                 </div>
@@ -33,11 +33,11 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tanggal</th>
-                            <th>Nomor Meja</th>
+                            <th>Date</th>
+                            <th>Table Number</th>
                             <th>Total</th>
-                            <th>Nama Karyawan</th>
-                            <th>Aksi</th>
+                            <th>Employee Name</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,16 +68,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Submit Confirmation</h5>
+                    <h5 class="modal-title">New Order Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{ route('create-order') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <p>Masukkan nomor meja</p>
+                        <p>Insert Table Number</p>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" id="tableNumber" placeholder="Nomor Meja" name="nomor_meja" required>
-                            <label for="floatingInput">Nomor Meja</label>
+                            <label for="floatingInput">Table Number</label>
                         </div>
                     </div>
                     <div class="modal-footer">

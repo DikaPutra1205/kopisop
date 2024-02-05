@@ -24,10 +24,15 @@ class ProfileController extends Controller
         ]);
 
         // Handle profile picture upload
+        if ($request->hasFile('profile_picture')){
         $imageName = time() . '.' . $request->file('profile_picture')->extension();
         $uploadedImage = $request->file('profile_picture')->move(public_path('profile_pictures'), $imageName);
         $imagePath = 'profile_pictures/' . $imageName;
         $oldImagePath = $user->profile_picture;
+        }
+        else{
+            $imagePath = null;
+        }
 
         if ($request->hasFile('profile_pictures') && $oldImagePath && file_exists(public_path($oldImagePath))) {
             unlink(public_path($oldImagePath));

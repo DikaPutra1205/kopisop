@@ -31,8 +31,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/order', [OrderController::class, 'index'])->name('order');
-    Route::get('/order/{id}/viewdetail', [OrderController::class, 'viewOrderDetail'])->name('view-order-detail');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('update-profile');
     Route::post('/update-password', [ProfileController::class, 'updatePassword'])->name('update-password');
@@ -67,4 +65,9 @@ Route::group(['middleware' => ['web', 'auth', 'checkKasir']], function () {
     Route::get('/order/{id}/detail', [OrderController::class, 'order'])->name('detail-order');
     Route::post('/order/{id}/submit', [OrderController::class, 'submitOrder'])->name('submit-order');
     Route::delete('/order/{order_id}/menu/{menu_id}', [OrderController::class, 'deleteMenu'])->name('delete-menu');
+});
+
+Route::group(['middleware' => ['web', 'auth', 'checkManagerOrCashier']], function () {
+    Route::get('/order', [OrderController::class, 'index'])->name('order');
+    Route::get('/order/{id}/viewdetail', [OrderController::class, 'viewOrderDetail'])->name('view-order-detail');
 });

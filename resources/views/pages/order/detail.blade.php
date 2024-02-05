@@ -7,9 +7,9 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-3 text-primary">Order Detail</h1>
         <p class="mb-1"><strong>Order ID:</strong> {{ $order->id }}</p>
-        <p class="mb-1"><strong>Nama Karyawan:</strong> {{ $order->user->nama }}</p>
-        <p class="mb-1"><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y') }}</p>
-        <p class="mb-5"><strong>Nomor Meja:</strong> {{ $order->nomor_meja }}</p>
+        <p class="mb-1"><strong>Employee Name:</strong> {{ $order->user->nama }}</p>
+        <p class="mb-1"><strong>Date:</strong> {{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y') }}</p>
+        <p class="mb-5"><strong>Table Number:</strong> {{ $order->nomor_meja }}</p>
 
         <div class="row">
             <!-- Menampilkan daftar menu -->
@@ -21,7 +21,7 @@
                             <img src="{{ asset($menu->image) }}" class="card-img-top" alt="{{ $menu->nama_menu }}" style="max-height: 200px; object-fit: cover;">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $menu->nama_menu }}</h5>
-                                <p class="card-text">Harga: Rp {{ number_format($menu->harga, 0, ',', '.') }}</p>
+                                <p class="card-text">Price: Rp {{ number_format($menu->harga, 0, ',', '.') }}</p>
                                 <form action="{{ route('submit-order', ['id' => $order->id]) }}" method="post">
                                     @csrf
                                     <input type="hidden" name="menu_id" value="{{ $menu->id }}">
@@ -64,7 +64,7 @@
                                     </span>
                                 </div>
                                 <div class="d-grid gap-2 mt-3">
-                                    <button type="button" class="btn btn-outline-danger rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal">Hapus</button>
+                                    <button type="button" class="btn btn-outline-danger rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal">Delete</button>
                                 </div>
                             </li>
                             @endforeach
@@ -73,10 +73,9 @@
                     </div>
                 </div>
 
-
                 <div class="card-footer mt-3">
                     <div class="d-grid gap-2">
-                        <a href="{{ route('order') }}" class="btn btn-outline-primary">Selesai</a>
+                        <a href="{{ route('order') }}" class="btn btn-outline-primary">Done</a>
                     </div>
                 </div>
             </div>
@@ -98,11 +97,16 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                 <!-- Form for Delete Action -->
-                <form action="{{ route('delete-menu', ['order_id' => $order->id, 'menu_id' => $detailOrder->menu->id]) }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-outline-danger">Delete</button>
-                </form>
+                @if(isset($detailOrder))
+                    <form action="{{ route('delete-menu', ['order_id' => $order->id, 'menu_id' => $detailOrder->menu->id]) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </form>
+                @else
+                    <!-- Tindakan atau tampilan yang sesuai ketika $detailOrder tidak terdefinisi -->
+                    <p>No detail order available.</p>
+                @endif
             </div>
         </div>
     </div>
