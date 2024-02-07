@@ -55,7 +55,7 @@
                                 </a>
                                 |
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal">
-                                    Hapus
+                                    Delete
                                 </button>
                             </td>
                         </tr>

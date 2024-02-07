@@ -14,8 +14,8 @@
 
                             <div class="d-flex justify-content-center py-4">
                                 <a href="index.html" class="logo d-flex align-items-center w-auto">
-                                    <img src="assets/img/logo.png" alt="">
-                                    <span class="d-none d-lg-block">NiceAdmin</span>
+                                    <img src="{{ asset('assets/img/kopi1.png') }}" alt="Kopi 1">
+                                    <span class="d-none d-lg-block">Bisa Ngopi</span>
                                 </a>
                             </div><!-- End Logo -->
 

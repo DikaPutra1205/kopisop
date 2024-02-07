@@ -1,3 +1,12 @@
+<footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Dika Putra</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+</footer><!-- End Footer -->
+
 <!-- Vendor JS Files -->
 <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

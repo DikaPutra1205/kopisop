@@ -3,7 +3,7 @@
 
   <div class="d-flex align-items-center justify-content-between">
     <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
-      <img src="{{ asset('assets/img/kopi1.png') }}" alt="Kopi 1">
+      <img src="{{ asset('assets/img/kopi1.png') }}" alt="Kopi">
       <span class="d-none d-lg-block">Bisa Ngopi</span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
