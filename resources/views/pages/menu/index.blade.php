@@ -28,7 +28,7 @@
                 <table id="myTable" class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Number</th>
                             <th>Menu Name</th>
                             <th>Price</th>
                             <th>Picture</th>
