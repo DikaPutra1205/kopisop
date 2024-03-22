@@ -47,6 +47,11 @@ Route::group(['middleware' => ['web', 'auth', 'checkAdmin']], function () {
     Route::get('/table', [TablesController::class, 'index'])->name('list-table');
     Route::get('/table/create', [TablesController::class, 'create'])->name('create-table');
     Route::post('/table/store', [TablesController::class, 'store'])->name('store-table');
+    Route::get('/table/{id}/edit', [TablesController::class, 'edit'])->name('edit-table');
+    Route::put('/table/{id}/update', [TablesController::class, 'update'])->name('update-table');
+    Route::delete('/table/{id}/hapus', [TablesController::class, 'destroy'])->name('hapus-table');
+    Route::post('/table/{id}/reservation', [TablesController::class, 'reservation'])->name('reserve-table');
+    Route::post('/table/{id}/reservation-cancel', [TablesController::class, 'cancelReservation'])->name('cancel-reservation');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'checkManager']], function () {
@@ -69,6 +74,8 @@ Route::group(['middleware' => ['web', 'auth', 'checkKasir']], function () {
     Route::get('/order/{id}/detail', [OrderController::class, 'order'])->name('detail-order');
     Route::post('/order/{id}/submit', [OrderController::class, 'submitOrder'])->name('submit-order');
     Route::delete('/order/{order_id}/menu/{menu_id}', [OrderController::class, 'deleteMenu'])->name('delete-menu');
+    Route::get('/order/{id}/status_update', [OrderController::class, 'statusUpdate'])->name('status-update');
+    Route::get('/order/{id}/receipt', [OrderController::class, 'generateReceipt'])->name('order.receipt');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'checkManagerOrCashier']], function () {

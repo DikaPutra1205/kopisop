@@ -13,6 +13,9 @@ class Order extends Model
     protected $fillable = [
         'id_meja',
         'total',
+        'nama_pelanggan',
+        'status',
+        'bayar',
         'created_by',
         'created_at',
         'updated_at',

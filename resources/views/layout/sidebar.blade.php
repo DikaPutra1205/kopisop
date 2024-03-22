@@ -50,6 +50,15 @@
     </li>
     @endif
 
+    @if (Auth::user()->id_level == 1)
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{{ route('list-table') }}">
+        <i class="bi bi-file-fill"></i>
+        <span>Table</span>
+      </a>
+    </li>
+    @endif
+
   </ul>
 
 </aside><!-- End Sidebar-->

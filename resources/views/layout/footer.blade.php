@@ -52,7 +52,6 @@
     }
 </script>
 
-<!-- Add this script code at the end of your body or in a separate script file -->
 </body>
 
 </html>

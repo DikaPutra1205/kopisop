@@ -30,9 +30,11 @@
             @if (Auth::user()->id_level == 1)
             <span>Admin</span>
             @elseif (Auth::user()->id_level == 2)
-            <span>Manager</span>
+            <span>Owner</span>
             @elseif (Auth::user()->id_level == 3)
             <span>Cashier</span>
+            @elseif (Auth::user()->id_level == 4)
+            <span>Waiter</span>
             @endif
           </li>
           <li>

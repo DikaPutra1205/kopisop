@@ -8,6 +8,7 @@
         <h1 class="h3 mb-3 text-primary">Order Detail</h1>
         <p class="mb-1"><strong>Order ID:</strong> {{ $order->id }}</p>
         <p class="mb-1"><strong>Employee Name:</strong> {{ $order->user->nama }}</p>
+        <p class="mb-1"><strong>Customer Name:</strong> {{ $order->nama_pelanggan }}</p>
         <p class="mb-1"><strong>Date:</strong> {{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y') }}</p>
         <p class="mb-5"><strong>Table Number:</strong> {{ $order->table->nomor_meja }}</p>
 
@@ -64,7 +65,37 @@
                                     </span>
                                 </div>
                                 <div class="d-grid gap-2 mt-3">
-                                    <button type="button" class="btn btn-outline-danger rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal">Delete</button>
+                                    <button type="button" class="btn btn-outline-danger rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal{{ $detailOrder->id }}">Delete</button>
+
+                                    <!-- Basic Modal -->
+                                    <div class="modal fade" id="basicModal{{ $detailOrder->id }}" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Delete Confirmation</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this item?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <!-- Form for Delete Action -->
+                                                    @if(isset($detailOrder))
+                                                    <form action="{{ route('delete-menu', ['order_id' => $order->id, 'menu_id' => $detailOrder->menu->id]) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                                    </form>
+                                                    @else
+                                                    <!-- Tindakan atau tampilan yang sesuai ketika $detailOrder tidak terdefinisi -->
+                                                    <p>No detail order available.</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- End Basic Modal-->
+
                                 </div>
                             </li>
                             @endforeach
@@ -83,33 +114,6 @@
     </div>
 </div>
 
-<!-- Basic Modal -->
-<div class="modal fade" id="basicModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Delete Confirmation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to delete this item?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                <!-- Form for Delete Action -->
-                @if(isset($detailOrder))
-                    <form action="{{ route('delete-menu', ['order_id' => $order->id, 'menu_id' => $detailOrder->menu->id]) }}" method="post">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-outline-danger">Delete</button>
-                    </form>
-                @else
-                    <!-- Tindakan atau tampilan yang sesuai ketika $detailOrder tidak terdefinisi -->
-                    <p>No detail order available.</p>
-                @endif
-            </div>
-        </div>
-    </div>
-</div><!-- End Basic Modal-->
+
 
 @include('layout.footer')

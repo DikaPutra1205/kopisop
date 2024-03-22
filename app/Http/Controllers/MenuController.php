@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreProductRequest;
 use App\Models\Menu;
 use Illuminate\Support\Facades\Redirect;
 
@@ -20,19 +19,25 @@ class MenuController extends Controller
         return view('pages.menu.create');
     }
 
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
     {
-        $imageName = time().'.'.$request->image->extension();
+        $validatedData = $request->validate([
+            'nama_menu' => ['required', 'max:100'],
+            'harga' => ['required', 'numeric', 'min:1'],
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $imageName = time() . '.' . $request->image->extension();
         $uploadedImage = $request->image->move(public_path('images'), $imageName);
         $imagePath = 'images/' . $imageName;
 
-        $params = $request->validated();
-        
-        if ($product = Menu::create($params)) {
-            $product->image = $imagePath;
-            $product->save();
+        $validatedData['image'] = $imagePath;
 
+        $product = Menu::create($validatedData);
+
+        if ($product) {
             return Redirect::route('list-menu')->with('success', 'Ditambahkan!');
+        } else {
         }
     }
 
@@ -41,7 +46,7 @@ class MenuController extends Controller
         $menu = Menu::findOrFail($id);
         return view('pages.menu.edit', compact('menu'));
     }
-    
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -52,7 +57,7 @@ class MenuController extends Controller
 
         $menu = Menu::findOrFail($id);
 
-        $imageName = time().'.'.$request->image->extension();
+        $imageName = time() . '.' . $request->image->extension();
         $uploadedImage = $request->image->move(public_path('images'), $imageName);
         $imagePath = 'images/' . $imageName;
         $oldImagePath = $menu->image;
@@ -69,7 +74,7 @@ class MenuController extends Controller
 
         return redirect()->route('list-menu')->with('success', 'Menu updated successfully');
     }
-    
+
     public function destroy($id)
     {
         $menu = Menu::findOrFail($id);

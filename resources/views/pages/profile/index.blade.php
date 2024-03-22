@@ -75,9 +75,11 @@
                                     @if (Auth::user()->id_level == 1)
                                     <div class="col-lg-9 col-md-8">Admin</div>
                                     @elseif (Auth::user()->id_level == 2)
-                                    <div class="col-lg-9 col-md-8">Manager</div>
+                                    <div class="col-lg-9 col-md-8">Owner</div>
                                     @elseif (Auth::user()->id_level == 3)
                                     <div class="col-lg-9 col-md-8">Cashier</div>
+                                    @elseif (Auth::user()->id_level == 4)
+                                    <div class="col-lg-9 col-md-8">Waiter</div>
                                     @endif
                                 </div>
 

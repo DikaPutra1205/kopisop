@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Table;
 use App\Models\LogActivity;
 use Illuminate\Support\Facades\Auth;
+use Dompdf\Dompdf;
 
 class OrderController extends Controller
 {
@@ -29,12 +30,16 @@ class OrderController extends Controller
     {
         $validatedData = $request->validate([
             'nomor_meja' => 'required|string|max:255',
+            'nama_pelanggan' => 'required|string|max:255',
         ]);
         $user = Auth::user();
 
         $order = Order::create([
             'id_meja' => $validatedData['nomor_meja'],
+            'nama_pelanggan' => $validatedData['nama_pelanggan'],
             'total' => 0,
+            'bayar' => 0,
+            'status' => 'Pending',
             'created_by' => $user->id,
         ]);
 
@@ -47,15 +52,22 @@ class OrderController extends Controller
             ]);
         }
 
+        $table_id =  $validatedData['nomor_meja'];
+        $table = Table::findOrFail($table_id);
+
+        $table->status = 'In Use';
+        $table->dipesan_oleh = $validatedData['nama_pelanggan'];
+
+        $table->save();
+
         return redirect()->route('detail-order', ['id' => $id]);
     }
 
     public function order(string $id)
     {
         $menus = Menu::all();
-        $order = Order::findOrFail($id); // Gantilah dengan model dan kolom yang sesuai
-        $detailOrders = $order->detailOrders; // Pastikan ada relasi di model Order
-
+        $order = Order::findOrFail($id);
+        $detailOrders = $order->detailOrders;
         return view('pages.order.detail', compact('menus', 'order', 'detailOrders'));
     }
 
@@ -89,6 +101,35 @@ class OrderController extends Controller
         return view('pages.order.viewdetail', ['order' => $order]);
     }
 
+    public function statusUpdate(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $request->validate([
+            'bayar' => 'required|numeric|min:' . $order->total
+        ], [
+            'bayar.min' => 'The payment amount must be at least equal to the total amount.'
+        ]);
+
+        $order->bayar = $request->bayar;
+        $order->save();
+
+        if ($order->status == 'Pending') {
+            $order->update(['status' => 'Completed']);
+        } else {
+            $order->update(['status' => 'Pending']);
+        }
+
+        $table_id = $order->id_meja;
+        $table = Table::findOrFail($table_id);
+
+        if ($table->status == 'In Use') {
+            $table->update(['status' => 'Available', 'dipesan_oleh' => null]);
+        }
+
+        return redirect()->back()->with('success', 'Order status updated successfully!');
+    }
+
+
     public function deleteMenu($orderId, $menuId)
     {
         $order = Order::findOrFail($orderId);
@@ -101,5 +142,33 @@ class OrderController extends Controller
         $order->update(['total' => $totalHarga]);
 
         return redirect()->back()->with('success', 'Menu deleted successfully!');
+    }
+
+    public function generateReceipt($id)
+    {
+        // Cari pesanan berdasarkan ID
+        $order = Order::findOrFail($id);
+
+        // Load view dan transfer data pesanan
+        $html = view('pages.order.struk', compact('order'))->render();
+
+        // Buat objek Dompdf
+        $dompdf = new Dompdf();
+
+        // Render HTML ke dalam Dompdf
+        $dompdf->loadHtml($html);
+
+        // Set ukuran dan orientasi kertas
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render PDF (mengkonversi HTML ke PDF)
+        $dompdf->render();
+
+        // Simpan struk PDF ke dalam file
+        $output = $dompdf->output();
+        file_put_contents('order_receipt.pdf', $output);
+
+        // Download file PDF
+        return response()->download('order_receipt.pdf')->deleteFileAfterSend(true);
     }
 }
