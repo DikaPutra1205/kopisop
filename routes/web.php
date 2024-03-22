@@ -7,6 +7,7 @@ use App\Http\Controllers\LogActivityController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TablesController;
 use App\Http\Controllers\UserController;
 use App\Models\LogActivity;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -43,6 +44,9 @@ Route::group(['middleware' => ['web', 'auth', 'checkAdmin']], function () {
     Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('edit-user');
     Route::put('/user/{id}/update', [UserController::class, 'update'])->name('update-user');
     Route::delete('/user/{id}/hapus', [UserController::class, 'destroy'])->name('hapus-user');
+    Route::get('/table', [TablesController::class, 'index'])->name('list-table');
+    Route::get('/table/create', [TablesController::class, 'create'])->name('create-table');
+    Route::post('/table/store', [TablesController::class, 'store'])->name('store-table');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'checkManager']], function () {

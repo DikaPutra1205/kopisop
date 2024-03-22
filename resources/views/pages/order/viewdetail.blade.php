@@ -30,7 +30,7 @@
                         <p class="mb-1"><strong>Order ID:</strong> {{ $order->id }}</p>
                         <p class="mb-1"><strong>Employee Name:</strong> {{ $order->user->nama }}</p>
                         <p class="mb-1"><strong>Date:</strong> {{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y') }}</p>
-                        <p class="mb-5"><strong>Table Number:</strong> {{ $order->nomor_meja }}</p>
+                        <p class="mb-5"><strong>Table Number:</strong> {{ $order->table->nomor_meja }}</p>
 
                         <!-- Order Items -->
                         <h3 class="mb-2">Order Details</h3>

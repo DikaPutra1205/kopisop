@@ -45,7 +45,7 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
-                            <td>{{ $item->nomor_meja }}</td>
+                            <td>{{ $item->table->nomor_meja }}</td>
                             <td>{{ $item->total }}</td>
                             <td>{{ $item->user->nama }}</td>
                             <td>
@@ -76,9 +76,14 @@
                     <div class="modal-body">
                         <p>Insert Table Number</p>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" id="tableNumber" placeholder="Nomor Meja" name="nomor_meja" required>
-                            <label for="floatingInput">Table Number</label>
+                            <select class="form-select" id="floatingSelect" name="nomor_meja" aria-label="Floating label select example" required>
+                                <option value="" selected disabled>Select Table Number</option>
+                                @foreach ($table as $item)
+                                <option value="{{ $item->id }}">{{ $item->nomor_meja }}</option>
+                                @endforeach
+                            </select>
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

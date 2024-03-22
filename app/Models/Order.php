@@ -11,7 +11,7 @@ class Order extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'nomor_meja',
+        'id_meja',
         'total',
         'created_by',
         'created_at',
@@ -26,6 +26,11 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function table() 
+    {
+        return $this->belongsTo(Table::class, 'id_meja');
     }
 
     public function menus()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Order;
+use App\Models\Table;
 use App\Models\LogActivity;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,8 +20,9 @@ class OrderController extends Controller
             $orders = Order::all();
         }
         $menus = Menu::all();
+        $table = Table::all();
 
-        return view('pages.order.index', ['order' => $orders, 'menus' => $menus]);
+        return view('pages.order.index', ['order' => $orders, 'menus' => $menus, 'table' => $table]);
     }
 
     public function create(Request $request)
@@ -31,7 +33,7 @@ class OrderController extends Controller
         $user = Auth::user();
 
         $order = Order::create([
-            'nomor_meja' => $validatedData['nomor_meja'],
+            'id_meja' => $validatedData['nomor_meja'],
             'total' => 0,
             'created_by' => $user->id,
         ]);
@@ -59,26 +61,21 @@ class OrderController extends Controller
 
     public function submitOrder(Request $request, $id)
     {
-        // Validasi request sesuai kebutuhan
         $request->validate([
             'menu_id' => 'required|exists:menu,id',
             'qty' => 'required|integer|min:1',
         ]);
 
-        // Buat atau update detail order
         $order = Order::findOrFail($id);
         $menuId = $request->input('menu_id');
         $qty = $request->input('qty');
 
-        // Perbarui atau tambahkan detail order
         $order->menus()->sync([$menuId => ['qty' => $qty]], false);
 
-        // Hitung total harga
         $totalHarga = $order->menus->sum(function ($menu) {
             return $menu->harga * $menu->pivot->qty;
         });
 
-        // Update total harga di tabel orders
         $order->update(['total' => $totalHarga]);
 
         return redirect()->route('detail-order', ['id' => $id])->with('success', 'Order submitted successfully!');
@@ -96,6 +93,12 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($orderId);
         $order->menus()->detach($menuId);
+
+        $totalHarga = $order->menus->sum(function ($menu) {
+            return $menu->harga * $menu->pivot->qty;
+        });
+
+        $order->update(['total' => $totalHarga]);
 
         return redirect()->back()->with('success', 'Menu deleted successfully!');
     }
