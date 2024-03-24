@@ -15,7 +15,7 @@ class OrderController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->id_level == 3) {
+        if ($user->id_level == 4) {
             $orders = Order::where('created_by', $user->id)->get();
         } else {
             $orders = Order::all();
@@ -45,7 +45,7 @@ class OrderController extends Controller
 
         $id = $order->id;
 
-        if (auth()->check() && auth()->user()->id_level == 3) {
+        if (auth()->check() && auth()->user()->id_level == 4) {
             LogActivity::create([
                 'user_id' => auth()->user()->id,
                 'activity' => 'Created Order',
@@ -126,6 +126,13 @@ class OrderController extends Controller
             $table->update(['status' => 'Available', 'dipesan_oleh' => null]);
         }
 
+        if (auth()->check() && auth()->user()->id_level == 3) {
+            LogActivity::create([
+                'user_id' => auth()->user()->id,
+                'activity' => 'Completed A Transaction',
+            ]);
+        }
+
         return redirect()->back()->with('success', 'Order status updated successfully!');
     }
 
@@ -146,29 +153,21 @@ class OrderController extends Controller
 
     public function generateReceipt($id)
     {
-        // Cari pesanan berdasarkan ID
         $order = Order::findOrFail($id);
 
-        // Load view dan transfer data pesanan
         $html = view('pages.order.struk', compact('order'))->render();
 
-        // Buat objek Dompdf
         $dompdf = new Dompdf();
 
-        // Render HTML ke dalam Dompdf
         $dompdf->loadHtml($html);
 
-        // Set ukuran dan orientasi kertas
         $dompdf->setPaper('A4', 'portrait');
 
-        // Render PDF (mengkonversi HTML ke PDF)
         $dompdf->render();
 
-        // Simpan struk PDF ke dalam file
         $output = $dompdf->output();
         file_put_contents('order_receipt.pdf', $output);
 
-        // Download file PDF
         return response()->download('order_receipt.pdf')->deleteFileAfterSend(true);
     }
 }

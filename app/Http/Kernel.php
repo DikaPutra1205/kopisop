@@ -70,5 +70,8 @@ class Kernel extends HttpKernel
         'checkWaiter' => \App\Http\Middleware\CheckWaiter::class,
         'checkAdminOrManager' => \App\Http\Middleware\CheckAdminOrManager::class,
         'checkManagerOrCashier' => \App\Http\Middleware\CheckManagerOrCashier::class,
+        'checkWaiter' => \App\Http\Middleware\CheckWaiter::class,
+        'checkWaiterOrAdmin' => \App\Http\Middleware\CheckWaiterOrAdmin::class,
+        'checkWaiterOrKasirOrManager' => \App\Http\Middleware\CheckWaiterOrKasirOrManager::class,
     ];
 }

@@ -28,7 +28,7 @@
                     </nav>
                 </div>
                 <div>
-                    @if (Auth::user()->id_level == 3)
+                    @if (Auth::user()->id_level == 4)
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
                         Add Order
                     </button>

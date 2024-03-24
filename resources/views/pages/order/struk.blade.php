@@ -130,8 +130,10 @@
                     <th>Change</th>
 
                     @if ($order->bayar > 0)
+                    <td></td>
                     <td class="price">Rp {{ number_format($order->bayar - $order->total, 0, ',', '.') }}</td>
                     @else
+                    <td></td>
                     <td class="price">Change: Rp 0</td>
                     @endif
                 </tr>

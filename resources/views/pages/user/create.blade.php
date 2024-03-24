@@ -65,11 +65,6 @@
                                     <label for="floatingSelect">Level Level</label>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="profilePicture" class="form-label">Profile Picture</label>
-                                    <input type="file" class="form-control" id="profilePicture" name="profile_picture" accept="image/*">
-                                </div>
-
                             </div>
                             <div class="card-footer">
                                 <div class="d-grid gap-2 mt-3">

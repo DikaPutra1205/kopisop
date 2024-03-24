@@ -39,8 +39,8 @@
                             {{ $order->status }}
                             @endif
                         </p>
-                        <p class="mb-5"><strong>Table Number:</strong> {{ $order->table->nomor_meja }}</p>
-                        <p class="mb-1"><strong>Date:</strong> {{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y') }}</p>
+                        <p class="mb-1"><strong>Table Number:</strong> {{ $order->table->nomor_meja }}</p>
+                        <p class="mb-5"><strong>Date:</strong> {{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y') }}</p>
 
                         <!-- Order Items -->
                         <h3 class="mb-2">Order Details</h3>

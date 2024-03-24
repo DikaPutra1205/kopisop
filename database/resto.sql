@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2024 at 07:17 PM
+-- Generation Time: Mar 24, 2024 at 09:47 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kopi`
+-- Database: `resto`
 --
 
 -- --------------------------------------------------------
@@ -36,23 +36,6 @@ CREATE TABLE `detail_orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `detail_orders`
---
-
-INSERT INTO `detail_orders` (`id`, `id_order`, `id_menu`, `qty`, `created_at`, `updated_at`) VALUES
-(20, 28, 16, 3, NULL, NULL),
-(21, 29, 16, 3, NULL, NULL),
-(22, 29, 12, 2, NULL, NULL),
-(23, 30, 12, 2, NULL, NULL),
-(24, 30, 16, 7, NULL, NULL),
-(25, 31, 16, 4, NULL, NULL),
-(26, 31, 12, 1, NULL, NULL),
-(27, 32, 16, 2, NULL, NULL),
-(28, 32, 12, 3, NULL, NULL),
-(29, 33, 16, 1, NULL, NULL),
-(30, 34, 16, 2, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -66,91 +49,6 @@ CREATE TABLE `log_activities` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `log_activities`
---
-
-INSERT INTO `log_activities` (`id`, `user_id`, `activity`, `created_at`, `updated_at`) VALUES
-(1, 5, 'Unknown Activity', '2024-02-03 04:03:05', '2024-02-03 04:03:05'),
-(2, 5, 'Unknown Activity', '2024-02-03 04:06:27', '2024-02-03 04:06:27'),
-(3, 5, 'logged in', '2024-02-03 04:07:37', '2024-02-03 04:07:37'),
-(4, 5, 'Unknown Activity', '2024-02-03 04:07:37', '2024-02-03 04:07:37'),
-(5, 5, 'logged in', '2024-02-03 04:08:48', '2024-02-03 04:08:48'),
-(6, 5, 'Unknown Activity', '2024-02-03 04:08:48', '2024-02-03 04:08:48'),
-(7, 5, 'logged in', '2024-02-03 04:10:39', '2024-02-03 04:10:39'),
-(8, 5, 'Unknown Activity', '2024-02-03 04:10:39', '2024-02-03 04:10:39'),
-(9, 5, 'Logged In', '2024-02-03 04:16:24', '2024-02-03 04:16:24'),
-(10, 5, 'Logged In', '2024-02-03 04:16:48', '2024-02-03 04:16:48'),
-(11, 5, 'Logged In', '2024-02-03 04:20:03', '2024-02-03 04:20:03'),
-(12, 5, 'Created Order', '2024-02-03 04:20:14', '2024-02-03 04:20:14'),
-(13, 5, 'Logged In', '2024-02-03 04:28:39', '2024-02-03 04:28:39'),
-(14, 5, 'Logged in', '2024-02-03 04:33:14', '2024-02-03 04:33:14'),
-(15, 5, 'Created Order', '2024-02-03 04:33:30', '2024-02-03 04:33:30'),
-(16, 5, 'Created Order', '2024-02-03 04:34:52', '2024-02-03 04:34:52'),
-(17, 5, 'Logged Out', '2024-02-03 04:35:03', '2024-02-03 04:35:03'),
-(18, 5, 'Logged In', '2024-02-03 04:37:30', '2024-02-03 04:37:30'),
-(19, 5, 'Logged Out', '2024-02-03 04:37:38', '2024-02-03 04:37:38'),
-(20, 5, 'Logged In', '2024-02-03 22:04:42', '2024-02-03 22:04:42'),
-(21, 5, 'Created Order', '2024-02-03 22:04:50', '2024-02-03 22:04:50'),
-(22, 5, 'Created Order', '2024-02-03 22:08:06', '2024-02-03 22:08:06'),
-(23, 5, 'Created Order', '2024-02-03 22:10:08', '2024-02-03 22:10:08'),
-(24, 5, 'Created Order', '2024-02-03 22:28:10', '2024-02-03 22:28:10'),
-(25, 5, 'Created Order', '2024-02-03 22:47:09', '2024-02-03 22:47:09'),
-(26, 5, 'Created Order', '2024-02-04 01:11:52', '2024-02-04 01:11:52'),
-(27, 5, 'Logged Out', '2024-02-04 01:34:47', '2024-02-04 01:34:47'),
-(28, 5, 'Logged In', '2024-02-04 08:39:24', '2024-02-04 08:39:24'),
-(29, 5, 'Created Order', '2024-02-04 08:48:05', '2024-02-04 08:48:05'),
-(30, 5, 'Logged Out', '2024-02-04 09:08:15', '2024-02-04 09:08:15'),
-(31, 5, 'Logged In', '2024-02-04 09:08:19', '2024-02-04 09:08:19'),
-(32, 5, 'Logged Out', '2024-02-04 09:16:55', '2024-02-04 09:16:55'),
-(33, 5, 'Logged In', '2024-02-04 09:18:33', '2024-02-04 09:18:33'),
-(34, 5, 'Created Order', '2024-02-04 09:18:59', '2024-02-04 09:18:59'),
-(35, 5, 'Logged Out', '2024-02-04 09:21:39', '2024-02-04 09:21:39'),
-(36, 5, 'Logged In', '2024-02-04 09:46:00', '2024-02-04 09:46:00'),
-(37, 5, 'Logged Out', '2024-02-04 12:18:18', '2024-02-04 12:18:18'),
-(38, 8, 'Logged In', '2024-02-04 12:59:30', '2024-02-04 12:59:30'),
-(39, 8, 'Logged Out', '2024-02-04 12:59:44', '2024-02-04 12:59:44'),
-(40, 5, 'Logged In', '2024-03-21 16:51:05', '2024-03-21 16:51:05'),
-(41, 5, 'Created Order', '2024-03-21 17:16:56', '2024-03-21 17:16:56'),
-(42, 5, 'Logged In', '2024-03-22 04:36:27', '2024-03-22 04:36:27'),
-(43, 5, 'Created Order', '2024-03-22 04:36:35', '2024-03-22 04:36:35'),
-(44, 5, 'Created Order', '2024-03-22 04:37:34', '2024-03-22 04:37:34'),
-(45, 5, 'Logged Out', '2024-03-22 05:43:25', '2024-03-22 05:43:25'),
-(46, 5, 'Logged In', '2024-03-22 05:45:41', '2024-03-22 05:45:41'),
-(47, 5, 'Created Order', '2024-03-22 05:51:34', '2024-03-22 05:51:34'),
-(48, 5, 'Logged Out', '2024-03-22 05:54:22', '2024-03-22 05:54:22'),
-(49, 5, 'Logged In', '2024-03-22 05:57:38', '2024-03-22 05:57:38'),
-(50, 5, 'Logged Out', '2024-03-22 05:58:30', '2024-03-22 05:58:30'),
-(51, 5, 'Logged In', '2024-03-22 06:28:32', '2024-03-22 06:28:32'),
-(52, 5, 'Created Order', '2024-03-22 06:28:38', '2024-03-22 06:28:38'),
-(53, 5, 'Created Order', '2024-03-22 06:43:45', '2024-03-22 06:43:45'),
-(54, 5, 'Created Order', '2024-03-22 06:50:57', '2024-03-22 06:50:57'),
-(55, 5, 'Logged Out', '2024-03-22 06:55:33', '2024-03-22 06:55:33'),
-(56, 5, 'Logged In', '2024-03-22 07:13:46', '2024-03-22 07:13:46'),
-(57, 5, 'Created Order', '2024-03-22 07:13:51', '2024-03-22 07:13:51'),
-(58, 5, 'Logged Out', '2024-03-22 07:14:31', '2024-03-22 07:14:31'),
-(59, 5, 'Logged In', '2024-03-22 07:19:49', '2024-03-22 07:19:49'),
-(60, 5, 'Created Order', '2024-03-22 07:19:53', '2024-03-22 07:19:53'),
-(61, 5, 'Created Order', '2024-03-22 07:20:51', '2024-03-22 07:20:51'),
-(62, 5, 'Created Order', '2024-03-22 07:21:03', '2024-03-22 07:21:03'),
-(63, 5, 'Logged Out', '2024-03-22 07:48:39', '2024-03-22 07:48:39'),
-(64, 5, 'Logged In', '2024-03-22 08:22:33', '2024-03-22 08:22:33'),
-(65, 5, 'Created Order', '2024-03-22 08:47:07', '2024-03-22 08:47:07'),
-(66, 5, 'Created Order', '2024-03-22 08:48:51', '2024-03-22 08:48:51'),
-(67, 5, 'Logged Out', '2024-03-22 08:57:59', '2024-03-22 08:57:59'),
-(68, 5, 'Logged In', '2024-03-22 09:25:07', '2024-03-22 09:25:07'),
-(69, 5, 'Created Order', '2024-03-22 09:26:29', '2024-03-22 09:26:29'),
-(70, 5, 'Created Order', '2024-03-22 09:39:53', '2024-03-22 09:39:53'),
-(71, 5, 'Created Order', '2024-03-22 13:28:11', '2024-03-22 13:28:11'),
-(72, 5, 'Created Order', '2024-03-22 13:32:20', '2024-03-22 13:32:20'),
-(73, 5, 'Created Order', '2024-03-22 13:35:54', '2024-03-22 13:35:54'),
-(74, 5, 'Created Order', '2024-03-22 13:39:49', '2024-03-22 13:39:49'),
-(75, 5, 'Created Order', '2024-03-22 13:40:42', '2024-03-22 13:40:42'),
-(76, 5, 'Logged Out', '2024-03-22 15:26:00', '2024-03-22 15:26:00'),
-(77, 5, 'Logged In', '2024-03-22 15:26:26', '2024-03-22 15:26:26'),
-(78, 5, 'Created Order', '2024-03-22 15:26:50', '2024-03-22 15:26:50'),
-(79, 5, 'Logged Out', '2024-03-22 17:24:33', '2024-03-22 17:24:33');
 
 -- --------------------------------------------------------
 
@@ -220,19 +118,6 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `id_meja`, `total`, `nama_pelanggan`, `status`, `bayar`, `created_by`, `created_at`, `updated_at`) VALUES
-(28, 7, 30000, 'Dika', 'Completed', 35000, '5', '2024-03-22 09:39:53', '2024-03-22 09:51:42'),
-(29, 7, 70000, 'Dika', 'Completed', 80000, '5', '2024-03-22 13:28:11', '2024-03-22 13:31:17'),
-(30, 7, 110000, 'Dika', 'Completed', 0, '5', '2024-03-22 13:32:20', '2024-03-22 13:32:32'),
-(31, 7, 70000, 'Dika', 'Completed', 0, '5', '2024-03-22 13:35:54', '2024-03-22 13:36:04'),
-(32, 7, 80000, 'Auk', 'Completed', 90000, '5', '2024-03-22 13:39:49', '2024-03-22 13:40:07'),
-(33, 7, 10000, 'Auk', 'Completed', 25000, '5', '2024-03-22 13:40:42', '2024-03-22 15:27:59'),
-(34, 8, 20000, 'Dika', 'Pending', 0, '5', '2024-03-22 15:26:50', '2024-03-22 15:26:55');
-
 -- --------------------------------------------------------
 
 --
@@ -267,15 +152,6 @@ CREATE TABLE `tables` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tables`
---
-
-INSERT INTO `tables` (`id`, `nomor_meja`, `status`, `dipesan_oleh`, `created_at`, `updated_at`) VALUES
-(6, 'A3', 'In Use', 'Auk', '2024-03-22 07:48:45', '2024-03-22 09:26:29'),
-(7, 'A6', 'Available', NULL, '2024-03-22 08:43:19', '2024-03-22 15:27:59'),
-(8, 'A1', 'In Use', 'Dika', '2024-03-22 15:26:12', '2024-03-22 15:26:50');
-
 -- --------------------------------------------------------
 
 --
@@ -289,20 +165,15 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `id_level` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `profile_picture` varchar(255) DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `id_level`, `created_at`, `updated_at`, `profile_picture`) VALUES
-(2, 'Risgan Paras', 'risgan@gmail.com', '$2y$12$8YkSD7zC090sRfnzBL41tuEdfl8Y.NWTf07OP1QN8JOXXtwCPqGsG', 1, '2024-01-29 18:35:43', '2024-01-31 03:22:23', NULL),
-(4, 'Dika Putra Indra', 'dika@gmail.com', '$2y$12$2uE1XNoAzlxbtZYPXg.Hh.SmKo.FCokSi2LDyxtdYc4rrWAMEyPGK', 2, '2024-01-31 04:27:39', '2024-02-04 13:29:06', 'profile_pictures/1707053346.png'),
-(5, 'Jekmis Tarigan', 'jemis@gmail.com', '$2y$12$fBzAai9rAe2vQcZc8WlMsulSAckpUYY/lrowfcGTtqV9knhdJkRka', 3, '2024-01-31 04:28:01', '2024-01-31 04:28:01', NULL),
-(8, 'Dabidog', 'dabidog@gmail.com', '$2y$12$D8LAxYU0bO2ZkWe49n7wX.CuYoRy5.Un3oi7/TKiMDnWx9H4mULzK', 3, '2024-02-04 12:47:02', '2024-02-04 12:55:56', 'profile_pictures/1707051356.jpg'),
-(9, 'Marcel', 'marcel@gmail.com', '$2y$12$tjAwrUA0G1JI.WI3GQ5Qh.EcDp6uStOfUWYK01rE44H4NDzgqDnXa', 4, '2024-03-22 05:56:14', '2024-03-22 05:56:14', 'profile_pictures/1711086974.jpg');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `id_level`, `created_at`, `updated_at`) VALUES
+(4, 'Dika Putra Indra', 'dika@gmail.com', '$2y$12$2uE1XNoAzlxbtZYPXg.Hh.SmKo.FCokSi2LDyxtdYc4rrWAMEyPGK', 2, '2024-01-31 04:27:39', '2024-02-04 13:29:06');
 
 -- --------------------------------------------------------
 
@@ -400,13 +271,13 @@ ALTER TABLE `users_level`
 -- AUTO_INCREMENT for table `detail_orders`
 --
 ALTER TABLE `detail_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `log_activities`
 --
 ALTER TABLE `log_activities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -424,7 +295,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

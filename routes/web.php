@@ -6,7 +6,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LogActivityController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TablesController;
 use App\Http\Controllers\UserController;
 use App\Models\LogActivity;
@@ -32,18 +31,10 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::post('/profile/update', [ProfileController::class, 'update'])->name('update-profile');
-    Route::post('/update-password', [ProfileController::class, 'updatePassword'])->name('update-password');
+    
 });
 
 Route::group(['middleware' => ['web', 'auth', 'checkAdmin']], function () {
-    Route::get('/user', [UserController::class, 'index'])->name('list-user');
-    Route::get('/user/create', [UserController::class, 'create'])->name('create-user');
-    Route::post('/user/store', [UserController::class, 'store'])->name('store-user');
-    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('edit-user');
-    Route::put('/user/{id}/update', [UserController::class, 'update'])->name('update-user');
-    Route::delete('/user/{id}/hapus', [UserController::class, 'destroy'])->name('hapus-user');
     Route::get('/table', [TablesController::class, 'index'])->name('list-table');
     Route::get('/table/create', [TablesController::class, 'create'])->name('create-table');
     Route::post('/table/store', [TablesController::class, 'store'])->name('store-table');
@@ -55,12 +46,12 @@ Route::group(['middleware' => ['web', 'auth', 'checkAdmin']], function () {
 });
 
 Route::group(['middleware' => ['web', 'auth', 'checkManager']], function () {
-    Route::get('/menu', [MenuController::class, 'index'])->name('list-menu');
-    Route::get('/menu/create', [MenuController::class, 'create'])->name('create-menu');
-    Route::post('/menu/store', [MenuController::class, 'store'])->name('store-menu');
-    Route::get('/menu/{id}/edit', [MenuController::class, 'edit'])->name('edit-menu');
-    Route::put('/menu/{id}/update', [MenuController::class, 'update'])->name('update-menu');
-    Route::delete('/menu/{id}/hapus', [MenuController::class, 'destroy'])->name('hapus-menu');
+    Route::get('/user', [UserController::class, 'index'])->name('list-user');
+    Route::get('/user/create', [UserController::class, 'create'])->name('create-user');
+    Route::post('/user/store', [UserController::class, 'store'])->name('store-user');
+    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('edit-user');
+    Route::put('/user/{id}/update', [UserController::class, 'update'])->name('update-user');
+    Route::delete('/user/{id}/hapus', [UserController::class, 'destroy'])->name('hapus-user');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'checkAdminOrManager']], function () {
@@ -70,15 +61,31 @@ Route::group(['middleware' => ['web', 'auth', 'checkAdminOrManager']], function 
 
 
 Route::group(['middleware' => ['web', 'auth', 'checkKasir']], function () {
+    Route::get('/order/{id}/status_update', [OrderController::class, 'statusUpdate'])->name('status-update');
+});
+
+Route::group(['middleware' => ['web', 'auth', 'checkManagerOrCashier']], function () {
+
+});
+
+Route::group(['middleware' => ['web', 'auth', 'checkWaiter']], function () {
     Route::post('/order/create', [OrderController::class, 'create'])->name('create-order');
     Route::get('/order/{id}/detail', [OrderController::class, 'order'])->name('detail-order');
     Route::post('/order/{id}/submit', [OrderController::class, 'submitOrder'])->name('submit-order');
     Route::delete('/order/{order_id}/menu/{menu_id}', [OrderController::class, 'deleteMenu'])->name('delete-menu');
-    Route::get('/order/{id}/status_update', [OrderController::class, 'statusUpdate'])->name('status-update');
-    Route::get('/order/{id}/receipt', [OrderController::class, 'generateReceipt'])->name('order.receipt');
 });
 
-Route::group(['middleware' => ['web', 'auth', 'checkManagerOrCashier']], function () {
+Route::group(['middleware' => ['web', 'auth', 'checkWaiterOrAdmin']], function () {
+    Route::get('/menu', [MenuController::class, 'index'])->name('list-menu');
+    Route::get('/menu/create', [MenuController::class, 'create'])->name('create-menu');
+    Route::post('/menu/store', [MenuController::class, 'store'])->name('store-menu');
+    Route::get('/menu/{id}/edit', [MenuController::class, 'edit'])->name('edit-menu');
+    Route::put('/menu/{id}/update', [MenuController::class, 'update'])->name('update-menu');
+    Route::delete('/menu/{id}/hapus', [MenuController::class, 'destroy'])->name('hapus-menu');
+});
+
+Route::group(['middleware' => ['web', 'auth', 'checkWaiterOrKasirOrManager']], function () {
     Route::get('/order', [OrderController::class, 'index'])->name('order');
     Route::get('/order/{id}/viewdetail', [OrderController::class, 'viewOrderDetail'])->name('view-order-detail');
+    Route::get('/order/{id}/receipt', [OrderController::class, 'generateReceipt'])->name('order.receipt');
 });

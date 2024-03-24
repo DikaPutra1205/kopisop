@@ -21,10 +21,11 @@
 <script src="{{ asset('assets/js/main.js') }}"></script>
 
 <!-- Add DataTable initialization script at the bottom of the page -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="{{ asset('assets/vendor/datatables/dataTables.bootstrap5.min.css') }}">
+<script src="{{ asset('assets/vendor/jquery/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap5.min.js') }}"></script>
+
 
 <script>
     $(document).ready(function() {
