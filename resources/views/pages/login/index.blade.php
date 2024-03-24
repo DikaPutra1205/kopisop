@@ -14,8 +14,8 @@
 
                             <div class="d-flex justify-content-center py-4">
                                 <a href="index.html" class="logo d-flex align-items-center w-auto">
-                                    <img src="{{ asset('assets/img/kopi1.png') }}" alt="Kopi 1">
-                                    <span class="d-none d-lg-block">Bisa Ngopi</span>
+                                    <img src="{{ asset('assets/img/hk1.jpg') }}" alt="Kitchen">
+                                    <span class="d-none d-lg-block">Hell's Kitchen</span>
                                 </a>
                             </div><!-- End Logo -->
 
