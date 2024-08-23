@@ -15,183 +15,186 @@
       </nav>
     </div><!-- End Page Title -->
 
+    @if (Auth::user()->id_level == 3 || Auth::user()->id_level == 1)
+
     <section class="section dashboard">
-      <div class="row">
+      <!-- Reports -->
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Laporan Saldo <span>/ 7 Hari Terakhir</span></h5>
 
-        <div class="row">
+            <!-- Line Chart -->
+            <div id="reportsChart"></div>
 
-        @if (Auth::user()->id_level == 2)
-          <!-- Sales Card -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
+            <script>
+              document.addEventListener("DOMContentLoaded", () => {
+                new ApexCharts(document.querySelector("#reportsChart"), {
+                  series: [{
+                    name: 'Saldo',
+                    data: @json($data -> pluck('saldo'))
+                  }],
+                  chart: {
+                    height: 350,
+                    type: 'area',
+                    toolbar: {
+                      show: false
+                    },
+                  },
+                  markers: {
+                    size: 4
+                  },
+                  colors: ['#4154f1', '#ff0000', '#00ff00'],
+                  fill: {
+                    type: "gradient",
+                    gradient: {
+                      shadeIntensity: 1,
+                      opacityFrom: 0.3,
+                      opacityTo: 0.4,
+                      stops: [0, 90, 100]
+                    }
+                  },
+                  dataLabels: {
+                    enabled: false
+                  },
+                  stroke: {
+                    curve: 'smooth',
+                    width: 2
+                  },
+                  xaxis: {
+                    type: 'datetime',
+                    categories: @json($data -> pluck('tanggal'))
+                  },
+                  tooltip: {
+                    x: {
+                      format: 'dd/MM/yy'
+                    },
+                  }
+                }).render();
+              });
+            </script>
+            <!-- End Line Chart -->
 
-              <div class="card-body">
-                <h5 class="card-title">Sales <span>| Today</span></h5>
+          </div>
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cart"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>{{ $todaySold }}</h6>
-                    <span class="small pt-1 fw-bold {{ $difference >= 0 ? 'text-success' : 'text-danger' }}">
-                      {{ abs($difference) }} Item
-                    </span>
-                    <span class="text-muted small pt-2 ps-1">
-                      {{ $difference >= 0 ? 'increase' : 'decrease' }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Sales Card -->
-          <!-- Sales Card -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
+        </div>
+      </div><!-- End Reports -->
 
-              <div class="card-body">
-                <h5 class="card-title">Sales <span>| This Month</span></h5>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Column Chart</h5>
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cart"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>{{ $thisMonthSold }}</h6>
-                    <span class="small pt-1 fw-bold {{ $differenceLastMonth >= 0 ? 'text-success' : 'text-danger' }}">
-                      {{ abs($differenceLastMonth) }} Item
-                    </span>
-                    <span class="text-muted small pt-2 ps-1">
-                      {{ $differenceLastMonth >= 0 ? 'increase' : 'decrease' }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Sales Card -->
+          <!-- Line Chart -->
+          <div id="lineChart"></div>
 
-          <!-- Revenue Card -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card revenue-card">
-              <div class="card-body">
-                <h5 class="card-title">Revenue <span>| Today</span></h5>
+          <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              // Ambil data stok dari Laravel blade template
+              const stocks = @json($stocks);
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-currency-dollar"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>{{ 'Rp '.number_format($todayRevenue, 0, ',', '.') }}</h6>
-                    <span class="small pt-1 fw-bold {{ $revenueDifferenceToday >= 0 ? 'text-success' : 'text-danger' }}">
-                      {{ 'Rp '.number_format(abs($revenueDifferenceToday), 0, ',', '.') }}
-                    </span>
-                    <span class="text-muted small pt-2 ps-1">
-                      {{ $revenueDifferenceToday >= 0 ? 'increase' : 'decrease' }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Revenue Card -->
+              // Siapkan data untuk chart
+              const categories = stocks.map(stock => stock.tanggal);
+              const pasirCilegonData = stocks.map(stock => stock.pasir_cilegon);
+              const pasirTayanData = stocks.map(stock => stock.pasir_tayan);
+              const split1020Data = stocks.map(stock => stock.split_10_20);
+              const splitScreeningData = stocks.map(stock => stock.split_screening);
+              const flyAshData = stocks.map(stock => stock.fly_ash);
+              const semenHcData = stocks.map(stock => stock.semen_hc);
+              const semenOpcData = stocks.map(stock => stock.semen_opc);
+              const abuBatuData = stocks.map(stock => stock.abu_batu);
+              const additiveSobuteData = stocks.map(stock => stock.additive_sobute);
+              const additiveDevChemData = stocks.map(stock => stock.additive_dev_chem);
+              const solarData = stocks.map(stock => stock.solar);
 
-          <!-- Revenue Card -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card revenue-card">
-              <div class="card-body">
-                <h5 class="card-title">Revenue <span>| This Month</span></h5>
+              new ApexCharts(document.querySelector("#lineChart"), {
+                series: [{
+                  name: 'Pasir Cilegon',
+                  data: pasirCilegonData
+                }, {
+                  name: 'Pasir Tayan',
+                  data: pasirTayanData
+                }, {
+                  name: 'Split 10-20',
+                  data: split1020Data
+                }, {
+                  name: 'Split Screening',
+                  data: splitScreeningData
+                }, {
+                  name: 'Fly Ash',
+                  data: flyAshData
+                }, {
+                  name: 'Semen HC',
+                  data: semenHcData
+                }, {
+                  name: 'Semen OPC',
+                  data: semenOpcData
+                }, {
+                  name: 'Abu Batu',
+                  data: abuBatuData
+                }, {
+                  name: 'Additive Sobute',
+                  data: additiveSobuteData
+                }, {
+                  name: 'Additive Dev Chem',
+                  data: additiveDevChemData
+                }, {
+                  name: 'Solar',
+                  data: solarData
+                }],
+                chart: {
+                  type: 'line',
+                  height: 350,
+                  toolbar: {
+                    show: false
+                  },
+                },
+                markers: {
+                  size: 4
+                },
+                colors: ['#4154f1', '#ff0000', '#00ff00', '#ff00ff', '#00ffff', '#ff8000', '#8000ff', '#ff0080', '#80ff00', '#0080ff', '#808080'],
+                fill: {
+                  type: "solid",
+                },
+                dataLabels: {
+                  enabled: false
+                },
+                stroke: {
+                  curve: 'smooth',
+                  width: 2
+                },
+                xaxis: {
+                  type: 'datetime',
+                  categories: categories
+                },
+                yaxis: {
+                  title: {
+                    text: 'Jumlah Stok'
+                  }
+                },
+                tooltip: {
+                  x: {
+                    format: 'dd/MM/yy'
+                  },
+                  y: {
+                    formatter: function(val) {
+                      return val + " unit"
+                    }
+                  }
+                }
+              }).render();
+            });
+          </script>
+          <!-- End Line Chart -->
 
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-currency-dollar"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>{{ 'Rp '.number_format($thisMonthRevenue, 0, ',', '.') }}</h6>
-                    <span class="small pt-1 fw-bold {{ $revenueDifferenceThisMonth >= 0 ? 'text-success' : 'text-danger' }}">
-                      {{ 'Rp '.number_format(abs($revenueDifferenceThisMonth), 0, ',', '.') }}
-                    </span>
-                    <span class="text-muted small pt-2 ps-1">
-                      {{ $revenueDifferenceThisMonth >= 0 ? 'increase' : 'decrease' }}
-                    </span>
-                  </div>
-                </div>
-              </div>
 
-            </div>
-          </div><!-- End Revenue Card -->
-
-          <!-- Customers Card -->
-          <div class="col-xxl-4 col-xl-12">
-            <div class="card info-card customers-card">
-              <div class="card-body">
-                <h5 class="card-title">Orders <span>| Today</span></h5>
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-people"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>{{ $todayOrders }}</h6>
-                    <span class="small pt-1 fw-bold {{ $orderDifferenceToday >= 0 ? 'text-success' : 'text-danger' }}">
-                      {{ abs($orderDifferenceToday) }} Item
-                    </span>
-                    <span class="text-muted small pt-2 ps-1">
-                      {{ $orderDifferenceToday >= 0 ? 'increase' : 'decrease' }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Customers Card -->
-
-          <!-- Customers Card -->
-          <div class="col-xxl-4 col-xl-12">
-            <div class="card info-card customers-card">
-              <div class="card-body">
-                <h5 class="card-title">Orders <span>| This Month</span></h5>
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-people"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>{{ $thisMonthOrders }}</h6>
-                    <span class="small pt-1 fw-bold {{ $orderDifferenceThisMonth >= 0 ? 'text-success' : 'text-danger' }}">
-                      {{ abs($orderDifferenceThisMonth) }} Item
-                    </span>
-                    <span class="text-muted small pt-2 ps-1">
-                      {{ $orderDifferenceThisMonth >= 0 ? 'increase' : 'decrease' }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Customers Card -->
-          @endif
-
-          <!-- Recent Activity -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Recent Activity</h5>
-
-              <div class="activity">
-                @foreach($logActivities as $logActivity)
-                <div class="activity-item d-flex">
-                  <div class="activite-label">{{ $logActivity->created_at->diffForHumans() }}</div>
-                  <i class='bi bi-circle-fill activity-badge {{ $logActivity->getTypeColor() }} align-self-start'></i>
-                  <div class="activity-content">
-                    {{ $logActivity->user->nama }} has {{ $logActivity->activity }}
-                  </div>
-                </div><!-- End activity item-->
-                @endforeach
-              </div>
-            </div>
-          </div><!-- End Recent Activity -->
         </div>
       </div>
     </section>
 
 
   </main><!-- End #main -->
+
+  @endif
 
   @include('layout.footer');
 

@@ -27,15 +27,6 @@ class LoginController extends Controller
 
         if (Auth::attempt($login)) {
             if (auth()->check()) {
-                if (auth()->user()->id_level == 3 || auth()->user()->id_level == 4) {
-                    LogActivity::create([
-                        'user_id' => auth()->user()->id,
-                        'activity' => 'Logged In',
-                    ]);
-
-                    return redirect()->route('order');
-                }
-
                 return redirect()->route('dashboard');
             }
         }
@@ -47,13 +38,6 @@ class LoginController extends Controller
 
     public function logout()
     {
-        if (auth()->check() && auth()->user()->id_level == 3 || auth()->check() && auth()->user()->id_level = 4) {
-            LogActivity::create([
-                'user_id' => auth()->user()->id,
-                'activity' => 'Logged Out',
-            ]);
-        }
-
         Auth::logout();
         return redirect('/');
     }

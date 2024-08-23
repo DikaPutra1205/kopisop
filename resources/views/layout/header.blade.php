@@ -1,10 +1,10 @@
 <!-- ======= Header ======= -->
+@include('layout.head');
 <header id="header" class="header fixed-top d-flex align-items-center">
 
   <div class="d-flex align-items-center justify-content-between">
     <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
-      <img src="{{ asset('assets/img/hk1.jpg') }}" alt="Kopi">
-      <span class="d-none d-lg-block">Hell's Kitchen</span>
+      <span class="d-none d-lg-block">PSC</span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
   </div><!-- End Logo -->
@@ -19,18 +19,9 @@
         </a>
         <!-- End Profile Iamge Icon -->
 
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow prosfile">
           <li class="dropdown-header">
             <h6>{{ Auth::user()->nama }}</h6>
-            @if (Auth::user()->id_level == 1)
-            <span>Admin</span>
-            @elseif (Auth::user()->id_level == 2)
-            <span>Owner</span>
-            @elseif (Auth::user()->id_level == 3)
-            <span>Cashier</span>
-            @elseif (Auth::user()->id_level == 4)
-            <span>Waiter</span>
-            @endif
           </li>
           <li>
             <hr class="dropdown-divider">

@@ -3,9 +3,9 @@
 
   <ul class="sidebar-nav" id="sidebar-nav">
 
-    @if (Auth::user()->id_level == 1 || Auth::user()->id_level == 2)
+    @if (Auth::user()->id_level == 1)
     <li class="nav-item">
-      <a class="nav-link " href="{{ url('/dashboard') }}">
+      <a class="nav-link collapsed" href="{{ url('/dashboard') }}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -14,50 +14,72 @@
 
     <li class="nav-heading">Pages</li>
 
-    @if (Auth::user()->id_level == 1 || Auth::user()->id_level == 4)
+    @if (Auth::user()->id_level == 5 || Auth::user()->id_level == 1)
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('list-menu') }}">
-        <i class="bi bi-book-half"></i>
-        <span>Menu</span>
+      <a class="nav-link collapsed" href="{{ route('list-cashflows') }}">
+        <i class="bi bi-cash"></i>
+        <span>Cash Flows</span>
       </a>
     </li>
     @endif
 
-    @if (Auth::user()->id_level == 2)
+    @if (Auth::user()->id_level == 2 || Auth::user()->id_level == 1)
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('list-user') }}">
-        <i class="bi bi-person"></i>
-        <span>User</span>
+      <a class="nav-link collapsed" href="{{ route('list-material') }}">
+        <i class="bi bi-box-fill"></i>
+        <span>Pembelian Material</span>
       </a>
     </li>
     @endif
 
-    @if (Auth::user()->id_level == 2 || Auth::user()->id_level == 3 || Auth::user()->id_level == 4)
+    @if (Auth::user()->id_level == 3 || Auth::user()->id_level == 1)
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('order') }}">
-        <i class="bi bi-pencil-square"></i>
-        <span>Order</span>
+      <a class="nav-link collapsed" href="{{ route('list-stocks') }}">
+        <i class="bi bi-bricks"></i>
+        <span>Stok Material</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{{ route('list-solar') }}">
+        <i class="bi bi-fuel-pump-diesel-fill"></i>
+        <span>Pemakaian Solar</span>
       </a>
     </li>
     @endif
 
-    @if (Auth::user()->id_level == 1 || Auth::user()->id_level == 2)
+    @if (Auth::user()->id_level == 6 || Auth::user()->id_level == 1 || Auth::user()->id_level == 2)
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('log') }}">
-        <i class="bi bi-clock-history"></i>
-        <span>Log Activity</span>
+      <a class="nav-link collapsed" href="{{ route('deliveries.index') }}">
+        <i class="bi bi-truck-front-fill"></i>
+        <span>Deliveries Order</span>
       </a>
     </li>
     @endif
 
-    @if (Auth::user()->id_level == 1)
+    @if (Auth::user()->id_level == 4 || Auth::user()->id_level == 1)
     <li class="nav-item">
-      <a class="nav-link collapsed" href="{{ route('list-table') }}">
-        <i class="bi bi-file-fill"></i>
-        <span>Table</span>
+      <a class="nav-link collapsed" href="{{ route('list-jobmix') }}">
+        <i class="bi bi-clipboard2-check"></i>
+        <span>Jobmix</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{{ route('list-konversi') }}">
+        <i class="bi bi-calculator"></i>
+        <span>Konversi</span>
       </a>
     </li>
     @endif
+
+    <li class="nav-heading">Logout</li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{{ route('logout') }}">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Sign Out</span>
+      </a>
+    </li>
 
   </ul>
 

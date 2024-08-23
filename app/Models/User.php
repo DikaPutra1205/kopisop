@@ -28,6 +28,6 @@ class User extends Model implements Authenticatable
 
     public function hasRole($role)
     {
-        return $this->id_level == $role; // Sesuaikan dengan atribut level yang sesuai pada model User Anda
+        return $this->id_level == $role;
     }
 }
